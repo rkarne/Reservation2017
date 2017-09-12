@@ -47,7 +47,7 @@ public class Login implements Serializable{
         
     }
     
-    public void dologin(){
+    public String dologin(){
         //if(user.equals("roja") && 123 == pass){
             //return username + " , " + password; 
             //return "loginsuccess";
@@ -61,11 +61,16 @@ public class Login implements Serializable{
             ResultSet rs = stm.executeQuery("SELECT * FROM users");
              while (rs.next()) {
                  user = rs.getString(1);
-                 pass = rs.getInt(2);
-                 if(pass == rs.getInt(2)){
+                 int password = rs.getInt(2);
+                 if(password == pass){
                      //return 'loginsuccess';
                     System.out.println(pass);
                     System.out.println(user);
+                    System.out.println(rs.getInt(2));
+                    return "loginsuccess";
+                 }
+                 else{
+                      return "index";
                  }
                 
              }
@@ -74,5 +79,6 @@ public class Login implements Serializable{
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         //return null;
+        return "index";
     }
 }
